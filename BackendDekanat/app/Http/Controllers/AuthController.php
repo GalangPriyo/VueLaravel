@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -24,6 +25,21 @@ class AuthController extends Controller
             ]);
         }
 
-        return $user->createToken('sanctum')->plainTextToken;
+        unset($user->email_verified_at);
+        unset($user->created_at);
+        unset($user->updated_at);
+        unset($user->deleted_at);
+
+        $user->tokens()->delete();
+        $token = $user->createToken('sanctum')->plainTextToken;
+        $user->token = $token;
+
+        return response(['data' => $user]);
+    }
+
+    public function me()
+    {
+        return response(['data' => Auth::user()]);
+        // return response(['data' => auth()->user()]);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AbleCreateOrder;
+use App\Http\Middleware\AbleCreateUser;
 use App\Http\Middleware\AbleFinishOrder;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -16,7 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'ableCreateOrder' => AbleCreateOrder::class,
-            'ableFinishOrder' => AbleFinishOrder::class
+            'ableFinishOrder' => AbleFinishOrder::class,
+            'ableCreateUser' => AbleCreateUser::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
