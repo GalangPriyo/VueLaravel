@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AbleCreateOrder;
+use App\Http\Middleware\AbleCreateUpdateItem;
 use App\Http\Middleware\AbleCreateUser;
 use App\Http\Middleware\AbleFinishOrder;
 use Illuminate\Foundation\Application;
@@ -19,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'ableCreateOrder' => AbleCreateOrder::class,
             'ableFinishOrder' => AbleFinishOrder::class,
             'ableCreateUser' => AbleCreateUser::class,
+            'ableCreateUpdateItem' => AbleCreateUpdateItem::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
